@@ -1,13 +1,20 @@
-import React from 'react';
-import { getInitialData } from '../utils/api';
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { handleInitialData } from '../actions/shared'
+import LoadingBar from 'react-redux-loading'
 
-function App() {
-  console.log(getInitialData);
-  return (
-    <div>
-      Starter code.
-    </div>
-  );
+class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(handleInitialData())
+  }
+  render () {
+    return (
+      <div>
+        <LoadingBar />
+        Starter code.
+      </div>
+    );
+  }
 }
 
-export default App;
+export default connect()(App);
