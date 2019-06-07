@@ -13,6 +13,8 @@ export function formatQuestion (question, author) {
     avatar: avatarURL,
     id,
     text,
+    optionOne,
+    optionTwo,
     timestamp
   }
 }
