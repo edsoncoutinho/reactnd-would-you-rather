@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import LoadingBar from 'react-redux-loading'
+import Dashboard from './Dashboard';
 
 class App extends Component {
   componentDidMount() {
@@ -9,12 +10,23 @@ class App extends Component {
   }
   render () {
     return (
-      <div>
+      <Fragment>
         <LoadingBar />
-        Starter code.
-      </div>
+        {this.props.loading === true
+          ? null
+          : <div>
+              <Dashboard />
+            </div>
+        }
+      </Fragment>
     );
   }
 }
 
-export default connect()(App);
+function mapStateToProps ({ authedUser }) {
+  return {
+    loading: authedUser === null
+  }
+}
+
+export default connect(mapStateToProps)(App);
