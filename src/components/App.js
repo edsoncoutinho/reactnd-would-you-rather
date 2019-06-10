@@ -5,6 +5,7 @@ import LoadingBar from 'react-redux-loading'
 import Dashboard from './Dashboard';
 import AnswerQuestion from './AnswerQuestion'
 import QuestionResults from './QuestionResults'
+import NewQuestion from './NewQuestion'
 
 class App extends Component {
   componentDidMount() {
@@ -20,6 +21,7 @@ class App extends Component {
               <Dashboard />
               <AnswerQuestion id={"8xf0y6ziyjabvozdd253nd"} />
               <QuestionResults id={"6ni6ok3ym7mf1p33lnez"} />
+              <NewQuestion />
             </div>
         }
       </Fragment>
