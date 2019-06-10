@@ -8,6 +8,10 @@ export function formatQuestion (question, author) {
   const equals = textOne.filter(value => textTwo.includes(value));
   const text = (equals.length) ? equals.slice(0, 2).join(' ') : null;
 
+  const votesNumber = optionOne.votes.length + optionTwo.votes.length;
+  const optionOnePercent = ((optionOne.votes.length * 100) / votesNumber)
+  const optionTwoPercent = ((optionTwo.votes.length * 100) / votesNumber)
+
   return {
     name,
     avatar: avatarURL,
@@ -15,6 +19,9 @@ export function formatQuestion (question, author) {
     text,
     optionOne,
     optionTwo,
+    optionOnePercent,
+    optionTwoPercent,
+    votesNumber,
     timestamp
   }
 }
