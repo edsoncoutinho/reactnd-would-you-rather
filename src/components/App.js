@@ -3,10 +3,6 @@ import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import LoadingBar from 'react-redux-loading'
 import Dashboard from './Dashboard';
-import AnswerQuestion from './AnswerQuestion'
-import QuestionResults from './QuestionResults'
-import NewQuestion from './NewQuestion'
-import Scoreboard from './Scoreboard'
 
 class App extends Component {
   componentDidMount() {
@@ -20,10 +16,6 @@ class App extends Component {
           ? null
           : <div>
               <Dashboard />
-              <AnswerQuestion id={"8xf0y6ziyjabvozdd253nd"} />
-              <QuestionResults id={"6ni6ok3ym7mf1p33lnez"} />
-              <NewQuestion />
-              <Scoreboard />
             </div>
         }
       </Fragment>
@@ -31,9 +23,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ authedUser }) {
+function mapStateToProps ({ loadingBar }) {
   return {
-    loading: authedUser === null
+    loading: loadingBar.default === 1
   }
 }
 
