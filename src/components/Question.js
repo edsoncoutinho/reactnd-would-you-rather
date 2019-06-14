@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { formatQuestion } from '../utils/helpers'
+import { Link, withRouter } from 'react-router-dom'
 
 class Question extends Component {
   render() {
@@ -10,19 +11,18 @@ class Question extends Component {
       return <p>This Question doesn't exist</p>
     }
 
-    const { name, avatar, text } = question
+    const { id, name, avatar, text } = question
     return (
-      <div>
-        <span>{name} asks:</span>
+      <Link to={`/questions/${id}`}>
+        <p>{name} asks:</p>
         <img
           src={avatar}
           alt={`Avatar of ${name}`}
           className='avatar'
         />
-        <span>Wolud you rather</span>
-        <span>... { text } ...</span>
-
-      </div>
+        <p>Wolud you rather</p>
+        <p>... { text } ...</p>
+      </Link>
     )
   }
 }
@@ -36,4 +36,4 @@ function mapStateToProps ({ users, questions }, { id } ) {
   }
 }
 
-export default connect(mapStateToProps)(Question)
+export default withRouter(connect(mapStateToProps)(Question))
