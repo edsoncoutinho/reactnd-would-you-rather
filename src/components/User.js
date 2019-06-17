@@ -6,10 +6,10 @@ class User extends Component {
   handleLogout = (e) => {
     e.preventDefault();
     this.props.dispatch(unsetAuthedUser());
-  }
+  };
 
   render() {
-    const { user } = this.props
+    const { user } = this.props;
     return (
       <ul>
         <li>{`Hello, ${user.name}`}</li>
@@ -20,16 +20,16 @@ class User extends Component {
             className='avatar'
           />
         </li>
-        <li><a onClick={this.handleLogout}>Logout</a></li>
+        <li><button onClick={this.handleLogout}>Logout</button></li>
       </ul>
-    )
-  }
-}
+    );
+  };
+};
 
 const mapStateToProps = ({ authedUser, users }) => {
   return {
     user: users[authedUser]
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps)(User)
+export default connect(mapStateToProps)(User);

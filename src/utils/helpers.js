@@ -1,6 +1,6 @@
-export function formatQuestion (question, author) {
-  const { id,  timestamp, optionOne, optionTwo } = question
-  const { name, avatarURL } = author
+export function formatQuestion(question, author) {
+  const { id, timestamp, optionOne, optionTwo } = question;
+  const { name, avatarURL } = author;
 
   const textOne = optionOne.text.split(' ');
   const textTwo = optionTwo.text.split(' ');
@@ -9,8 +9,8 @@ export function formatQuestion (question, author) {
   const text = (equals.length) ? equals.slice(0, 2).join(' ') : null;
 
   const votesNumber = optionOne.votes.length + optionTwo.votes.length;
-  const optionOnePercent = ((optionOne.votes.length * 100) / votesNumber)
-  const optionTwoPercent = ((optionTwo.votes.length * 100) / votesNumber)
+  const optionOnePercent = ((optionOne.votes.length * 100) / votesNumber);
+  const optionTwoPercent = ((optionTwo.votes.length * 100) / votesNumber);
 
   return {
     name,
@@ -23,5 +23,5 @@ export function formatQuestion (question, author) {
     optionTwoPercent,
     votesNumber,
     timestamp
-  }
-}
+  };
+};

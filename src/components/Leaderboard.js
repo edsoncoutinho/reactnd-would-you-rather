@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ScoreDetails from './ScoreDetails';
 
-class Scoreboard extends Component {
+class Leaderboard extends Component {
   render() {
     return (
       <div>
@@ -25,4 +25,4 @@ function mapStateToProps({ users }) {
   }
 }
 
-export default connect(mapStateToProps)(Scoreboard)
+export default connect(mapStateToProps)(Leaderboard)

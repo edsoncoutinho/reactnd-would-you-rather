@@ -1,45 +1,52 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { handleAddQuestion } from '../actions/questions'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { handleAddQuestion } from '../actions/questions';
+import { Redirect } from 'react-router-dom';
 
 class NewQuestion extends Component {
   state = {
     optionOneText: '',
     optionTwoText: '',
-  }
+    toHome: false
+  };
 
   handleChangeOptionOneText = (e) => {
-    const optionOneText = e.target.value
+    const optionOneText = e.target.value;
 
     this.setState(() => ({
       optionOneText
-    }))
-  }
+    }));
+  };
 
   handleChangeOptionTwoText = (e) => {
-    const optionTwoText = e.target.value
+    const optionTwoText = e.target.value;
 
     this.setState(() => ({
       optionTwoText
-    }))
-  }
+    }));
+  };
 
   handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const { optionOneText, optionTwoText } = this.state
-    const { dispatch } = this.props
+    const { optionOneText, optionTwoText } = this.state;
+    const { dispatch } = this.props;
 
-    dispatch(handleAddQuestion(optionOneText, optionTwoText))
+    dispatch(handleAddQuestion(optionOneText, optionTwoText));
 
     this.setState({
       optionOneText: '',
       optionTwoText: '',
-    })
-  }
+      toHome: true
+    });
+  };
 
   render() {
-    const { optionOneText, optionTwoText } = this.state
+    const { optionOneText, optionTwoText, toHome } = this.state;
+
+    if (toHome === true) {
+      return <Redirect to='/' />;
+    }
 
     return (
       <div>
@@ -66,8 +73,8 @@ class NewQuestion extends Component {
           </button>
         </form>
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
-export default connect()(NewQuestion)
+export default connect()(NewQuestion);

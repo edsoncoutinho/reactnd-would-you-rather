@@ -1,31 +1,32 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { formatQuestion } from '../utils/helpers'
-import { handleAddQuestionAnswer } from '../actions/questions'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { formatQuestion } from '../utils/helpers';
+import { handleAddQuestionAnswer } from '../actions/questions';
 
 class AnswerQuestion extends Component {
   state = {
     answer: "optionOne"
-  }
+  };
+
   handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const { authedUser, qid, dispatch } = this.props
-    const { answer } = this.state
+    const { authedUser, qid, dispatch } = this.props;
+    const { answer } = this.state;
 
-    dispatch(handleAddQuestionAnswer({ authedUser, qid, answer }))
-  }
+    dispatch(handleAddQuestionAnswer({ authedUser, qid, answer }));
+  };
 
   handleChange = (e) => {
     const answer = e.target.value;
 
     this.setState(() => ({
       answer: answer
-    }))
-  }
+    }));
+  };
 
   render() {
-    const { question } = this.props
+    const { question } = this.props;
 
     return (
       <div>
@@ -43,9 +44,9 @@ class AnswerQuestion extends Component {
           </button>
         </form>
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 function mapStateToProps({ authedUser, users, questions }, { id }) {
   const question = questions[id];
@@ -56,7 +57,7 @@ function mapStateToProps({ authedUser, users, questions }, { id }) {
     question: question
       ? formatQuestion(question, users[question.author])
       : null
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps)(AnswerQuestion)
+export default connect(mapStateToProps)(AnswerQuestion);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AnswerQuestion from './AnswerQuestion';
-import QuestionResults from './QuestionResults'
+import QuestionResults from './QuestionResults';
 
 class Questions extends Component {
   render() {
@@ -13,16 +13,16 @@ class Questions extends Component {
           : <AnswerQuestion id={question_id} />
         }
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 function mapStateToProps({ authedUser, users }, props) {
-  const { question_id } = props.match.params
+  const { question_id } = props.match.params;
   return {
     answered: Object.keys(users[authedUser].answers).includes(question_id),
     question_id
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps)(Questions)
+export default connect(mapStateToProps)(Questions);

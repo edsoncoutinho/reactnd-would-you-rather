@@ -1,17 +1,17 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { formatQuestion } from '../utils/helpers'
-import { Link, withRouter } from 'react-router-dom'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { formatQuestion } from '../utils/helpers';
+import { Link, withRouter } from 'react-router-dom';
 
 class Question extends Component {
   render() {
-    const { question } = this.props
+    const { question } = this.props;
 
     if (question === null) {
-      return <p>This Question doesn't exist</p>
+      return <p>This Question doesn't exist</p>;
     }
 
-    const { id, name, avatar, text } = question
+    const { id, name, avatar, text } = question;
     return (
       <Link to={`/questions/${id}`}>
         <p>{name} asks:</p>
@@ -21,19 +21,19 @@ class Question extends Component {
           className='avatar'
         />
         <p>Wolud you rather</p>
-        <p>... { text } ...</p>
+        <p>... {text} ...</p>
       </Link>
-    )
-  }
-}
+    );
+  };
+};
 
-function mapStateToProps ({ users, questions }, { id } ) {
-  const question = questions[id]
+function mapStateToProps({ users, questions }, { id }) {
+  const question = questions[id];
   return {
     question: question
       ? formatQuestion(question, users[question.author])
       : null
-  }
-}
+  };
+};
 
-export default withRouter(connect(mapStateToProps)(Question))
+export default withRouter(connect(mapStateToProps)(Question));

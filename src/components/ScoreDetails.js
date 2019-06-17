@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class ScoreDetails extends Component {
   render() {
-    const { name, avatar, score, answeredQuestions, createdQuestions, leaders } = this.props
+    const { name, avatar, score, answeredQuestions, createdQuestions, leaders } = this.props;
 
     return (
       <div>
@@ -18,9 +18,9 @@ class ScoreDetails extends Component {
         <h4>Score</h4>
         <p>{score}</p>
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 function mapStateToProps({ users }, { id, ranking }) {
   const user = users[id];
@@ -51,7 +51,7 @@ function mapStateToProps({ users }, { id, ranking }) {
     answeredQuestions,
     createdQuestions,
     leaders
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps)(ScoreDetails)
+export default connect(mapStateToProps)(ScoreDetails);

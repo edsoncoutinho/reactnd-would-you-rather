@@ -1,57 +1,60 @@
-import { saveQuestion, saveQuestionAnswer } from '../utils/api'
-import { showLoading, hideLoading } from 'react-redux-loading'
+import { saveQuestion, saveQuestionAnswer } from '../utils/api';
+import { showLoading, hideLoading } from 'react-redux-loading';
+import { addUserAnswer } from './users';
 
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
-export const ADD_QUESTION = 'ADD_QUESTION'
-export const ADD_QUESTION_ANSWER = 'ADD_QUESTION_ANSWER'
+export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
+export const ADD_QUESTION = 'ADD_QUESTION';
+export const ADD_QUESTION_ANSWER = 'ADD_QUESTION_ANSWER';
 
-export function receiveQuestions (questions) {
+export function receiveQuestions(questions) {
   return {
     type: RECEIVE_QUESTIONS,
-    questions,
-  }
-}
+    questions
+  };
+};
 
-function addQuestion (question) {
+function addQuestion(question) {
   return {
     type: ADD_QUESTION,
-    question,
-  }
-}
+    question
+  };
+};
 
-export function handleAddQuestion (optionOneText, optionTwoText) {
+export function handleAddQuestion(optionOneText, optionTwoText) {
   return (dispatch, getState) => {
-    const { authedUser } = getState()
-
-    dispatch(showLoading())
+    const { authedUser } = getState();
 
     return saveQuestion({
       optionOneText,
       optionTwoText,
-      author: authedUser,
+      author: authedUser
     })
-      .then((question) => dispatch(addQuestion(question)))
-      .then(() => dispatch(hideLoading()))
+      .then((question) => dispatch(addQuestion(question)));
   }
 }
 
-function addQuestionAnswer ({ authedUser, qid, answer }) {
+function addQuestionAnswer({ authedUser, qid, answer }) {
   return {
     type: ADD_QUESTION_ANSWER,
     authedUser,
     qid,
-    answer,
-  }
-}
+    answer
+  };
+};
 
-export function handleAddQuestionAnswer (info) {
+export function handleAddQuestionAnswer(info) {
   return (dispatch) => {
-    dispatch(addQuestionAnswer(info))
+    dispatch(showLoading());
 
     return saveQuestionAnswer(info)
+      .then(() => {
+        dispatch(addQuestionAnswer(info));
+        dispatch(addUserAnswer(info));
+      })
+      .then(() => dispatch(hideLoading()))
       .catch((e) => {
         console.warn('Error in saveQuestionAnswer: ', e)
         alert('The was an error on answer the question. Try again.')
-      })
-  }
-}
+      });
+  };
+};
