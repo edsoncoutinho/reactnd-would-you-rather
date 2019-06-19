@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser';
 
+
 class LoginPage extends Component {
   state = {
     user: ''
@@ -18,33 +19,49 @@ class LoginPage extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const user = this.state.user;
+    const { user } = this.state;
     const { dispatch } = this.props;
 
     dispatch(setAuthedUser(user));
   };
 
   render() {
+    const { user } = this.state;
     return (
-      <div>
-        <h3>Sign in</h3>
-        <form onSubmit={this.handleSubmit}>
-          <select
-            onChange={this.handleChange}
-            defaultValue={this.state.user}
-          >
-            <option value="">Select User</option>
-            {
-              this.props.options.map(option =>
-                <option key={option.value} value={option.value}>{option.label}</option>
-              )
-            }
-          </select>
-          <button>
-            Sign in
-          </button>
-        </form>
-
+      <div className="container">
+        <div className="card">
+          <h5 className="card-header">Would You Rather</h5>
+          <div className="card-body">
+            <form onSubmit={this.handleSubmit}>
+              <h3>Sign in</h3>
+              <div className="form-group">
+                <select
+                  id="user"
+                  className="form-control"
+                  onChange={this.handleChange}
+                  defaultValue={user}
+                >
+                  <option value="">Select User</option>
+                  {
+                    this.props.options.map(option =>
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    )
+                  }
+                </select>
+              </div>
+              <div className="form-group">
+                <button
+                  className="btn btn-outline-dark btn-block"
+                  disabled={user === ''}
+                >
+                  Sign in
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     );
   };

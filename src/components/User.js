@@ -10,25 +10,31 @@ class User extends Component {
 
   render() {
     const { user } = this.props;
+
+    if (!user) {
+      return null;
+    }
+
     return (
-      <ul>
-        <li>{`Hello, ${user.name}`}</li>
-        <li>
-          <img
-            src={user.avatarURL}
-            alt={`Avatar of ${user.name}`}
-            className='avatar'
-          />
-        </li>
-        <li><button onClick={this.handleLogout}>Logout</button></li>
-      </ul>
+      <span className="navbar-text">
+        <span>{`Hello, ${user.name}`}</span>
+        <img
+          className="navbar-avatar bg-white"
+          src={user.avatarURL}
+          alt={`Avatar of ${user.name}`}
+        />
+        <button className="btn btn-outline-secondary" onClick={this.handleLogout}>Logout</button>
+      </span>
     );
   };
 };
 
 const mapStateToProps = ({ authedUser, users }) => {
   return {
-    user: users[authedUser]
+    user: authedUser
+      ? users[authedUser]
+      : null
+
   };
 };
 

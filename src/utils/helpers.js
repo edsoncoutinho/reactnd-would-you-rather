@@ -9,8 +9,8 @@ export function formatQuestion(question, author) {
   const text = (equals.length) ? equals.slice(0, 2).join(' ') : null;
 
   const votesNumber = optionOne.votes.length + optionTwo.votes.length;
-  const optionOnePercent = ((optionOne.votes.length * 100) / votesNumber);
-  const optionTwoPercent = ((optionTwo.votes.length * 100) / votesNumber);
+  const optionOnePercent = ((optionOne.votes.length * 100) / votesNumber).toFixed(1);
+  const optionTwoPercent = ((optionTwo.votes.length * 100) / votesNumber).toFixed(1);
 
   return {
     name,

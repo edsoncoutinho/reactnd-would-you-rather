@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
 import LoadingBar from 'react-redux-loading';
@@ -9,7 +9,6 @@ import Leaderboard from './Leaderboard';
 import Questions from './Questions';
 import PageNotFound from './PageNotFound';
 import LoginPage from './LoginPage';
-import User from './User';
 import Nav from './Nav';
 
 class App extends Component {
@@ -23,18 +22,16 @@ class App extends Component {
         <Fragment>
           <LoadingBar />
           <Nav />
-          {authed
-            ? <User />
-            : <LoginPage />
-          }
+          {!authed && <LoginPage />}
           {authed && loading === false
-            ? <div>
+            ? <div className="container-fluid">
               <Switch>
                 <Route path='/' exact component={ListQuestions} />
                 <Route path='/add' exact component={NewQuestion} />
                 <Route path='/leaderboard' exact component={Leaderboard} />
                 <Route path='/questions/:question_id' exact component={Questions} />
-                <Route path="*" component={PageNotFound} />
+                <Route path='/404' component={PageNotFound} />
+                <Redirect from='*' to='/404' />
               </Switch>
             </div>
             : null

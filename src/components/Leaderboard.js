@@ -5,12 +5,14 @@ import ScoreDetails from './ScoreDetails';
 class Leaderboard extends Component {
   render() {
     return (
-      <div>
-        {this.props.scores.map((user, key) => (
-          <li key={user.id}>
-            <ScoreDetails id={user.id} ranking={key} />
-          </li>
-        ))}
+      <div className="card">
+        <div className="card-body">
+          {this.props.scores.map((user, key) => (
+            <div key={user.id}>
+              <ScoreDetails id={user.id} ranking={key} />
+            </div>
+          ))}
+        </div>
       </div>
     )
   }

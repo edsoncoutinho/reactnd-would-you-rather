@@ -49,29 +49,45 @@ class NewQuestion extends Component {
     }
 
     return (
-      <div>
-        <h3>Create new Question</h3>
-        <form onSubmit={this.handleSubmit}>
-          <p>Complete the questions</p>
-          <h4>Would you rather ...</h4>
-          <input
-            type="text"
-            placeholder="Enter Option One Text Here"
-            value={optionOneText}
-            onChange={this.handleChangeOptionOneText}
-          />
-          <p>OR</p>
-          <input
-            type="text"
-            placeholder="Enter Option Two Text Here"
-            value={optionTwoText}
-            onChange={this.handleChangeOptionTwoText}
-          />
-          <button
-            disabled={optionOneText === '' || optionTwoText === ''}>
-            Submit
-          </button>
-        </form>
+      <div className="card">
+        <h5 className="card-header">Create new Question</h5>
+        <div className="card-body">
+          <form onSubmit={this.handleSubmit}>
+            <p>Complete the questions</p>
+            
+            <h4>Would you rather ...</h4>
+            
+            <div className="form-group">
+              <input
+                className="form-control"
+                type="text"
+                placeholder="Enter Option One Text Here"
+                value={optionOneText}
+                onChange={this.handleChangeOptionOneText}
+              />
+            </div>
+
+            <p className="text-center">OR</p>
+
+            <div className="form-group">
+              <input
+                className="form-control"
+                type="text"
+                placeholder="Enter Option Two Text Here"
+                value={optionTwoText}
+                onChange={this.handleChangeOptionTwoText}
+              />
+            </div>
+            <div className="form-group">
+              <button
+                className="btn btn-outline-dark btn-block"
+                disabled={optionOneText === '' || optionTwoText === ''}
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     );
   };

@@ -13,16 +13,31 @@ class Question extends Component {
 
     const { id, name, avatar, text } = question;
     return (
-      <Link to={`/questions/${id}`}>
-        <p>{name} asks:</p>
-        <img
-          src={avatar}
-          alt={`Avatar of ${name}`}
-          className='avatar'
-        />
-        <p>Wolud you rather</p>
-        <p>... {text} ...</p>
-      </Link>
+
+      <div className="card">
+        <div className="card-header">
+          {name} asks:
+        </div>
+
+        <div className="card-body">
+          <div className="row">
+            <div className="col-sm-4 d-flex align-items-center justify-content-center border-right">
+              <img
+                src={avatar}
+                alt={`Avatar of ${name}`}
+                className='card-avatar'
+              />
+            </div>
+            <div className="col-sm-8">
+              <h5>Would you rather</h5>
+              <p>... {text} ...</p>
+              <Link to={`/questions/${id}`}>
+                <button className="btn btn-outline-dark btn-block">View Poll</button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   };
 };
