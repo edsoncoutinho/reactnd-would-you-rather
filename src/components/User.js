@@ -1,32 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { unsetAuthedUser } from '../actions/authedUser';
+import { UNSET_AUTHED_USER } from '../actions/authedUser';
 
-class User extends Component {
-  handleLogout = (e) => {
-    e.preventDefault();
-    this.props.dispatch(unsetAuthedUser());
-  };
+const User = props => {
+  if (!props.user) {
+    return null;
+  }
 
-  render() {
-    const { user } = this.props;
-
-    if (!user) {
-      return null;
-    }
-
-    return (
-      <span className="navbar-text">
-        <span>{`Hello, ${user.name}`}</span>
-        <img
-          className="navbar-avatar bg-white"
-          src={user.avatarURL}
-          alt={`Avatar of ${user.name}`}
-        />
-        <button className="btn btn-outline-secondary" onClick={this.handleLogout}>Logout</button>
-      </span>
-    );
-  };
+  return (
+    <span className="navbar-text">
+      <span>{`Hello, ${props.user.name}`}</span>
+      <img
+        className="navbar-avatar bg-white"
+        src={props.user.avatarURL}
+        alt={`Avatar of ${props.user.name}`}
+      />
+      <button className="btn btn-outline-secondary" onClick={props.logout}>Logout</button>
+    </span>
+  );
 };
 
 const mapStateToProps = ({ authedUser, users }) => {
@@ -34,8 +25,13 @@ const mapStateToProps = ({ authedUser, users }) => {
     user: authedUser
       ? users[authedUser]
       : null
-
   };
 };
 
-export default connect(mapStateToProps)(User);
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch({ type: UNSET_AUTHED_USER }),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(User);

@@ -10,21 +10,10 @@ class NewQuestion extends Component {
     toHome: false
   };
 
-  handleChangeOptionOneText = (e) => {
-    const optionOneText = e.target.value;
-
-    this.setState(() => ({
-      optionOneText
-    }));
-  };
-
-  handleChangeOptionTwoText = (e) => {
-    const optionTwoText = e.target.value;
-
-    this.setState(() => ({
-      optionTwoText
-    }));
-  };
+  handleOptionChange = (e) => {
+    e.preventDefault();
+    this.setState({[e.target.name]: e.target.value});
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -63,7 +52,8 @@ class NewQuestion extends Component {
                 type="text"
                 placeholder="Enter Option One Text Here"
                 value={optionOneText}
-                onChange={this.handleChangeOptionOneText}
+                onChange={this.handleOptionChange}
+                name="optionOneText"
               />
             </div>
 
@@ -75,7 +65,8 @@ class NewQuestion extends Component {
                 type="text"
                 placeholder="Enter Option Two Text Here"
                 value={optionTwoText}
-                onChange={this.handleChangeOptionTwoText}
+                onChange={this.handleOptionChange}
+                name="optionTwoText"
               />
             </div>
             <div className="form-group">
